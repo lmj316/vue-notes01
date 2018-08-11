@@ -1,0 +1,908 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:Vue基础-day01</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<h1 id="vue-day01">Vue基础-day01</h1>
+<!-- TOC -->
+<ul>
+<li><a href="#课前准备">课前准备</a><ul>
+<li><a href="#浏览器插件">浏览器插件</a></li>
+<li><a href="#vs-code插件">VS Code插件</a></li>
+<li><a href="#玩转vs-code">玩转Vs code</a></li>
+</ul>
+</li>
+<li><a href="#课程介绍">课程介绍</a><ul>
+<li><a href="#为什么学习vue">为什么学习Vue</a></li>
+<li><a href="#什么是mvvm">什么是MVVM</a></li>
+<li><a href="#vue初体验">Vue初体验</a></li>
+</ul>
+</li>
+<li><a href="#vue常用系统指令">Vue常用系统指令</a><ul>
+<li><a href="#插值表达式">插值表达式</a></li>
+<li><a href="#v-text">v-text</a></li>
+<li><a href="#v-html">v-html</a></li>
+<li><a href="#v-bind">v-bind</a></li>
+<li><a href="#v-for">v-for</a></li>
+<li><a href="#v-model">v-model</a></li>
+<li><a href="#v-on">v-on</a></li>
+<li><a href="#v-on按键修饰符">v-on按键修饰符</a></li>
+<li><a href="#v-if">v-if</a></li>
+<li><a href="#v-show">v-show</a></li>
+<li><a href="#v-cloak">v-cloak</a></li>
+</ul>
+</li>
+<li><a href="#案例-利用系统指令实现品牌案例管理">案例-利用系统指令实现品牌案例管理</a><ul>
+<li><a href="#目的">目的</a></li>
+<li><a href="#资源准备">资源准备</a></li>
+<li><a href="#功能-数据展示实现">功能-数据展示实现</a></li>
+<li><a href="#功能-数据删除">功能-数据删除</a></li>
+<li><a href="#功能-数据添加">功能-数据添加</a></li>
+<li><a href="#功能-按回车键添加数据">功能-按回车键添加数据</a></li>
+<li><a href="#功能-输入框自动聚焦">功能-输入框自动聚焦</a></li>
+<li><a href="#ref">ref</a></li>
+<li><a href="#功能-时间格式化">功能-时间格式化</a></li>
+<li><a href="#过滤器">过滤器</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h2 id="-">课前准备</h2>
+<h3 id="-">浏览器插件</h3>
+<ul>
+<li>Vue.js devtools</li>
+</ul>
+<h3 id="vs-code-">VS Code插件</h3>
+<p>自动补全标签</p>
+<ul>
+<li>Auto Close Tag</li>
+<li>Auto Complete Tag</li>
+<li>Auto Rename Tag</li>
+</ul>
+<p>开启一个服务器浏览HTML网页，第一次使用需要Ctrl + Shift + p输入 live server选择open</p>
+<ul>
+<li>Live Server</li>
+</ul>
+<p>路径自动补全</p>
+<ul>
+<li>Path Intellisense</li>
+</ul>
+<p>vue语法高亮和自动补全代码</p>
+<ul>
+<li>Vetur</li>
+<li>VueHelper</li>
+</ul>
+<h3 id="-vs-code">玩转Vs code</h3>
+<ul>
+<li><p><a href="https://github.com/Microsoft/vscode-tips-and-tricks">Vs Code奇淫技巧</a></p>
+</li>
+<li><p>Vs Code设置</p>
+<p>文件---&gt;首选项---&gt;设置，然后添加如下代码：</p>
+<pre><code class="lang-json">&quot;emmet.syntaxProfiles&quot;: {
+    &quot;vue-html&quot;: &quot;html&quot;,
+    &quot;vue&quot;: &quot;html&quot;
+},
+&quot;emmet.includeLanguages&quot;: {
+    &quot;vue-html&quot;: &quot;html&quot;,
+    &quot;vue&quot;: &quot;html&quot;
+}
+</code></pre>
+<h2 id="-">课程介绍</h2>
+</li>
+</ul>
+<h3 id="-vue">为什么学习Vue</h3>
+<p>  <img src="./img/day01/为什么学习vue.png" alt="为什么学习vue"></p>
+<h3 id="-mvvm">什么是MVVM</h3>
+<pre><code>- M =&gt; Model(数据模型)
+- V =&gt; View(视图模型,负责将数据模型转化成UI展现出来，就是那些DOM结构)
+- VM =&gt; ViewModel(一个同步View和Model的对象)
+</code></pre><p><img src="./img/day01/MVVM.png" alt="MVVM"></p>
+<h3 id="vue-">Vue初体验</h3>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;!-- 1. 引入vue文件 --&gt;
+  &lt;script src=&quot;./vue2.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- 如果超过vue实例的管辖范围，这个{{}}作用就会失效 --&gt;
+  &lt;div&gt;{{msg}}&lt;/div&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;!-- 5. 展示数据：通过插值表达式{{}} ，作用是专门用来渲染文本--&gt;
+    &lt;h1&gt;{{msg}}&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    // 2. 创建vue实例，作用：他会监管我们的html代码
+    var vm = new Vue({
+      // 3. 通过一个el属性来指定vue实例的监管范围,后面跟一个id
+      el: &#39;#app&#39;,
+      // 4. 用data属性将要展示的变量存起来,data后面跟一个对象
+      data: {
+        msg: &#39;hello world&#39;
+      }
+    })
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="vue-">Vue常用系统指令</h2>
+<h3 id="-">插值表达式</h3>
+<pre><code class="lang-html">    数据绑定最常见的形式，其中最常见的是使用插值表达式，写法是{{}} 中写表达式
+    例如：&lt;span&gt;Message: {{ msg }}&lt;/span&gt;
+    Mustache 标签将会被替代为对应数据对象上 msg 属性（msg定义在data对象中）的值。
+    无论何时，绑定的数据对象上 msg 属性发生了改变，插值处的内容都会更新。
+
+    {{}}对JavaScript 表达式支持，例如：
+    {{ number + 1 }}
+    {{ ok ? &#39;YES&#39; : &#39;NO&#39; }}
+    {{ message.split(&#39;&#39;).reverse().join(&#39;&#39;) }}
+
+    但是有个限制就是，每个绑定都只能包含单个表达式，如下表达式无效：
+    &lt;!-- 这是语句，不是表达式 --&gt;
+    {{ var a = 1 }}
+
+    &lt;!-- 这也是语句，不是表达式 --&gt;
+    {{ number++ }} 会报警告：vue2.js:482 [Vue warn]: You may have an infinite update loop in a component render function.
+
+    &lt;!-- 流控制也不会生效，请使用三元表达式 --&gt;
+    {{ if (ok) { return message } }}
+</code></pre>
+<h3 id="v-text">v-text</h3>
+<pre><code class="lang-html">  &lt;!-- v-text可以将一段文本渲染到指定的元素中,例如： --&gt;
+  &lt;div v-text=&quot;msg&quot;&gt;&lt;/div&gt;
+  new Vue({
+      data:{
+          msg:&#39;hello world&#39;
+      }
+  });
+
+  &lt;!-- 输出结果：--&gt;
+  &lt;div&gt;hello world&lt;/div&gt;
+</code></pre>
+<h3 id="v-html">v-html</h3>
+<pre><code class="lang-html">  差值表达式和v-text会将数据解释为纯文本，而非 HTML 。
+  为了输出真正的 HTML ，你需要使用 v-html 指令：
+  例如：
+  &lt;div v-html=&quot;rawHtml&quot;&gt;&lt;/div&gt;
+      new Vue({
+          data:{
+              rawHtml:&#39;&lt;h1&gt;hello world&lt;/h1&gt;&#39;
+          }
+  })
+
+  被插入的内容都会被当做 HTML,但是对于没有HTML标签的数据绑定时作用同v-text和{{}}
+</code></pre>
+<h3 id="v-bind">v-bind</h3>
+<pre><code class="lang-html">  1、作用：可以给html元素或者组件动态地绑定一个或多个特性，例如动态绑定style和class
+
+  2、举例：
+      1、img的src从imageSrc变量中取得
+          &lt;img v-bind:src=&quot;imageSrc&quot; &gt;
+
+          2、从classA, classB两个变量的值作为class的值，
+          结果是：&lt;div class=&quot;A B&quot;&gt;classA, classB&lt;/div&gt;        
+          &lt;div v-bind:class=&quot;[classA, classB]&quot;&gt;classA, classB&lt;/div&gt;
+
+          3、isRed变量如果为true，则class的值为red，否则没有
+          &lt;div v-bind:class=&quot;{ red: isRed }&quot;&gt;isred&lt;/div&gt;
+
+          4、div的class属性值一定有classA变量的值，而是否有classB和classC变量的值取决于isB和isC是否为true，二者一一对应
+          &lt;div v-bind:class=&quot;[classA, { classB: isB, classC: isC }]&quot;&gt;数组对象&lt;/div&gt;
+
+          5、变量加常量
+          &lt;div v-bind:style=&quot;{ fontSize: size + &#39;px&#39; }&quot;&gt;size22&lt;/div&gt;
+
+          6、变量加常量的另一种写法
+          &lt;img v-bind=&quot;{src:imageSrc+&#39;?v=1.0&#39;}&quot; &gt;
+
+          7、对象数组
+          &lt;div v-bind:style=&quot;[styleObjectA, styleObjectB]&quot;&gt;styleObjectA, styleObjectB&lt;/div&gt;
+
+  3、缩写形式
+      &lt;img :src=&quot;imageSrc&quot;&gt;
+      &lt;div :class=&quot;[classA, classB]&quot;&gt;classA, classB&lt;/div&gt;
+      &lt;div v-bind:class=&quot;{ red: isRed }&quot;&gt;isred&lt;/div&gt;
+      &lt;div v-bind:class=&quot;[classA, { classB: isB, classC: isC }]&quot;&gt;数组对象&lt;/div&gt;
+      &lt;div v-bind:style=&quot;{ fontSize: size + &#39;px&#39; }&quot;&gt;size22&lt;/div&gt;
+      &lt;img v-bind=&quot;{src:imageSrc+&#39;?v=1.0&#39;}&quot; &gt;
+      &lt;div v-bind:style=&quot;[styleObjectA, styleObjectB]&quot;&gt;styleObjectA, styleObjectB&lt;/div&gt;
+
+
+    vue对象初始化
+    &lt;script&gt;
+      // 实例化vue对象（MVVM中的View Model）
+      new Vue({
+          // vm控制的区块为id为app的div，此div中的所有vue指令均可以被vm解析
+          el:&#39;#app&#39;,
+          data:{
+          // 数据 （MVVM中的Model）   
+          imageSrc:&#39;http://157.122.54.189:8998/vue/vuebase/chapter1/imgs/d1-11.png&#39;,
+          isRed:true,
+          classA:&#39;A&#39;,
+          classB:&#39;B&#39;,
+          isB:true,
+          isC:true,
+          size:22,
+          styleObjectA:{color:&#39;red&#39;},
+          styleObjectB:{fontSize:&#39;30px&#39;}
+          },
+          methods:{
+
+          }
+      })
+  &lt;/script&gt;
+</code></pre>
+<h3 id="v-for">v-for</h3>
+<pre><code class="lang-html">  &lt;!-- 
+    v-for用法：
+      item in Array
+      (item, index) in Array
+      value in Object
+      (value, key, index) in Object
+
+    :key属性具有唯一性，不能重复，它能够唯一标识数组的每一项
+    将来数据中的某一项的值发生了改变，则v-for只会更新当前项对应的这个dom元素的值，而不是更新整个数据，从而提高效率，参考https://www.zhihu.com/question/61064119/answer/183717717
+
+    注意：以下变动不会触发视图更新
+      1. 通过索引给数组设置新值
+      2. 通过length改变数组
+    解决：
+      1. Vue.set(arr, index, newValue)
+      2. arr.splice(index, 1, newValue)
+    --&gt;
+    &lt;ul&gt;
+      &lt;li v-for=&quot;item in user&quot;&gt;{{item.name}}&lt;/li&gt;
+      &lt;li v-for=&quot;(item, index) in user&quot; :key=&quot;index&quot;&gt;{{index}}.{{item.name}}&lt;/li&gt;
+      &lt;li&gt;---------------华丽的分割线---------------&lt;/li&gt;
+      &lt;li v-for=&quot;value in boss&quot;&gt;{{value}}&lt;/li&gt;
+      &lt;li v-for=&quot;(value, key, index) in boss&quot;&gt; {{index}}.{{key}}:{{value}}&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;script&gt;
+    var vm = new Vue({
+      el: &#39;#app&#39;,
+      data: {
+        user: [
+          {name: &#39;jack&#39;},
+          {name: &#39;neil&#39;},
+          {name: &#39;rose&#39;}
+        ],
+        boss: {
+          name: &#39;马云&#39;,
+          age: 50,
+          money: 1000000002030
+        }
+      }
+    })
+    &lt;/script&gt;
+</code></pre>
+<h3 id="v-model">v-model</h3>
+<pre><code class="lang-html">  1、在表单控件或者组件上创建双向绑定
+  2、v-model仅能在如下元素中使用：
+    input
+    select
+    textarea
+    components（Vue中的组件）
+
+  3、举例：
+    &lt;input type=&quot;text&quot; v-model=&quot;uname&quot; /&gt;
+
+  new Vue({
+      data:{
+          uname:&#39;&#39; //这个属性值和input元素的值相互一一对应，二者任何一个的改变都会联动的改变对方
+        }
+  })
+</code></pre>
+<h3 id="v-on">v-on</h3>
+<pre><code class="lang-html">  1、作用：绑定事件监听，表达式可以是一个方法的名字或一个内联语句，
+  如果没有修饰符也可以省略，用在普通的html元素上时，只能监听 原生
+  DOM 事件。用在自定义元素组件上时，也可以监听子组件触发的自定义事件。
+
+  2、常用事件：
+      v-on:click
+      v-on:keydown
+      v-on:keyup
+      v-on:mousedown
+      v-on:mouseover
+      v-on:submit
+      ....
+
+  3、示例：
+    &lt;!-- 方法处理器 --&gt;
+    &lt;button v-on:click=&quot;doThis&quot;&gt;&lt;/button&gt;
+    &lt;!-- 内联语句 --&gt;
+    &lt;button v-on:click=&quot;doThat(&#39;hello&#39;, $event)&quot;&gt;&lt;/button&gt;
+
+    &lt;!-- 阻止默认行为，没有表达式 --&gt;
+    &lt;form v-on:submit.prevent&gt;&lt;/form&gt;
+
+   5、v-on的缩写形式：可以使用@替代 v-on:
+    &lt;button @click=&quot;doThis&quot;&gt;&lt;/button&gt;
+
+
+  6、按键修饰符
+    触发像keydown这样的按键事件时，可以使用按键修饰符指定按下特殊的键后才触发事件
+
+    写法：
+      &lt;input type=&quot;text&quot; @keydown.enter=&quot;kd1&quot;&gt;  当按下回车键时才触发kd1事件
+
+      由于回车键对应的keyCode是13，也可以使用如下替代
+      &lt;input type=&quot;text&quot; @keydown.13=&quot;kd1&quot;&gt;  当按下回车键时才触发kd1事件
+
+      但是如果需要按下字母a（对应的keyCode=65）才触发kd1事件，有两种写法：
+      1、由于默认不支持a这个按键修饰符，需要Vue.config.keyCodes.a = 65 添加一个对应,所以这种写法为：
+
+      Vue.config.keyCodes.a = 65
+      &lt;input type=&quot;text&quot; @keydown.a=&quot;kd1&quot;&gt;  这样即可触发
+
+      2、也可以之间加上a对应的数字65作为按键修饰符
+      &lt;input type=&quot;text&quot; @keydown.65=&quot;kd1&quot;&gt;  这样即可触发
+
+      键盘上对应的每个按键可以通过 http://keycode.info/ 获取到当前按下键所对应的数字
+</code></pre>
+<h3 id="v-on-">v-on按键修饰符</h3>
+<ul>
+<li><p>作用说明</p>
+<pre><code class="lang-html">文档地址：https://cn.vuejs.org/v2/guide/events.html#键值修饰符
+
+在监听键盘事件时，我们经常需要监测常见的键值。 Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：
+.enter
+.tab
+.delete (捕获 “删除” 和 “退格” 键)
+.esc
+.space
+.up
+.down
+.left
+.right
+</code></pre>
+</li>
+<li><p>可以自定义按键别名</p>
+<pre><code class="lang-html">// 在Vue2.0版本中扩展一个f1的按键修饰符写法：
+Vue.config.keyCodes.f1 = 112
+
+// 使用
+&lt;button @keyup.f1=&quot;someFunc&quot;&gt;&lt;/button&gt;
+</code></pre>
+</li>
+</ul>
+<h3 id="v-if">v-if</h3>
+<pre><code class="lang-html">  1、作用：根据表达式的值的真假条件来决定是否渲染元素，如果条件为false不渲染（达到隐藏元素的目的），为true则渲染。在切换时元素及它的数据绑定被销毁并重建
+
+  2、示例：
+    &lt;!-- Handlebars 模板 --&gt;
+    {{#if isShow}}
+      &lt;h1&gt;Yes&lt;/h1&gt;
+    {{/if}}
+
+    通常我们使用写法居多：
+    &lt;h1 v-if=&quot;isShow&quot;&gt;Yes&lt;/h1&gt;
+
+    也可以用 v-else 添加一个 “else” 块：
+    &lt;h1 v-if=&quot;isShow&quot;&gt;Yes&lt;/h1&gt;
+    &lt;h1 v-else&gt;No&lt;/h1&gt;
+
+    注意：v-else 元素必须紧跟在 v-if 元素否则它不能被识别。
+
+    new Vue({
+        data:{
+          isShow:true
+        }
+    });
+</code></pre>
+<h3 id="v-show">v-show</h3>
+<pre><code class="lang-html">  1、根据表达式的真假值，切换元素的 display CSS 属性，如果为false，则在元素上添加 display:none来隐藏元素，否则移除display:none实现显示元素
+
+  2、示例：
+      &lt;h1 v-show=&quot;isShow&quot;&gt;Yes&lt;/h1&gt;
+
+      new Vue({
+          data:{
+            isShow:true
+              }
+      });
+
+  3、v-if和v-show的总结：
+      v-if和v-show 都能够实现对一个元素的隐藏和显示操作,但是v-if是将这个元素添加或者移除到dom中，而v-show
+      是在这个元素上添加 style=&quot;display:none&quot;和移除它来控制元素的显示和隐藏的
+</code></pre>
+<h3 id="v-cloak">v-cloak</h3>
+<pre><code class="lang-html">  v-cloak指令保持在元素上直到关联实例结束编译后自动移除，v-cloak和 CSS 规则如 [v-cloak] { display: none } 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
+  通常用来防止{{}}表达式闪烁问题
+  例如：
+  &lt;style&gt;
+  [v-cloak] { display: none }
+  &lt;/style&gt;
+
+  &lt;!-- 在span上加上 v-cloak和css样式控制以后，浏览器在加载的时候会先把span隐藏起来，知道 Vue实例化完毕以后，才会将v-cloak从span上移除，那么css就会失去作用而将span中的内容呈现给用户 --&gt;
+  &lt;span v-cloak&gt;{{msg}}&lt;/span&gt;    
+
+  new Vue({
+      data:{
+          msg:&#39;hello ivan&#39;
+        }
+  })
+</code></pre>
+<h2 id="-">案例-利用系统指令实现品牌案例管理</h2>
+<h3 id="-">目的</h3>
+<p>  通过案例熟悉Vue系统指令的用法和结构的写法练习，做到知识点的巩固和学会
+  应用，并且在案例的扩展需求中，学习Vue新知识点，做到先有需求，再有知识点
+  学习，最后到知识点的应用，让学员学习知识点的同时学会知识点的应用</p>
+<h3 id="-">资源准备</h3>
+<ul>
+<li><p>效果图<br/>
+<img src="./img/day01/案例效果图.png" alt="效果图"></p>
+</li>
+<li><p>案例html结构</p>
+<pre><code class="lang-html">&lt;body&gt;
+&lt;div id=&quot;app&quot;&gt;
+&lt;div class=&quot;add&quot;&gt;
+    编号:&lt;input type=&quot;text&quot;&gt;
+    品牌名称:&lt;input type=&quot;text&quot;&gt;
+    &lt;input type=&quot;button&quot; value=&quot;添加&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;add&quot;&gt;
+    品牌名称:&lt;input type=&quot;text&quot; placeholder=&quot;请输入搜索条件&quot;&gt;
+&lt;/div&gt;
+
+&lt;div&gt;
+    &lt;table class=&quot;tb&quot;&gt;
+        &lt;tr&gt;
+            &lt;th&gt;编号&lt;/th&gt;
+            &lt;th&gt;品牌名称&lt;/th&gt;
+            &lt;th&gt;创立时间&lt;/th&gt;
+            &lt;th&gt;操作&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr &gt;
+            &lt;td colspan=&quot;4&quot;&gt;没有品牌数据&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;!-- 动态生成内容tr --&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</code></pre>
+</li>
+<li><p>案例css样式</p>
+<pre><code class="lang-html">&lt;style&gt;
+
+  #app{
+      width:600px;
+          margin:10px auto;
+  }
+    .tb{
+        border-collapse:collapse;
+        width: 100%;
+    }
+    .tb th{
+        background-color: #0094ff;
+        color:white;
+    }
+
+    .tb td,.tb th{
+        padding:5px;
+        border:1px solid black;
+        text-align: center;
+    }
+
+    .add{
+        padding: 5px;
+        border:1px solid black;
+        margin-bottom: 10px;
+    }
+&lt;/style&gt;
+</code></pre>
+</li>
+</ul>
+<h3 id="-">功能-数据展示实现</h3>
+<ol>
+<li><p>在 data 中添加 一个名称为 list的变量，类型为数组,存放品牌数据的对象,格式为:{id:1,name:&#39;宝马&#39;,ctime:Date()}</p>
+<pre><code class="lang-js">var vm = new Vue({
+el: &#39;#app&#39;,
+data: {
+ list: [
+   {id: 1, title: &#39;LV&#39;, ctime: new Date()},
+   {id: 2, title: &#39;CC&#39;, ctime: new Date()},
+   {id: 3, title: &#39;CK&#39;, ctime: new Date()},
+ ]
+}
+})
+</code></pre>
+</li>
+<li><p>在table中的“动态生成内容tr”位置使用v-for指令遍历list数组数据生成表格内容行，注意要写<code>:key</code></p>
+<pre><code class="lang-html">   &lt;tr v-for=&quot;(item, index) in list&quot; :key=&quot;index&quot;&gt;
+     &lt;td&gt;{{item.id}}&lt;/td&gt;
+     &lt;td&gt;{{item.title}}&lt;/td&gt;
+     &lt;td&gt;{{item.ctime}}&lt;/td&gt;
+     &lt;td&gt;
+       &lt;a href=&quot;javascript:void(0)&quot;&gt;删除&lt;/a&gt;
+     &lt;/td&gt;
+   &lt;/tr&gt;
+</code></pre>
+</li>
+<li><p>处理 “没有品牌数据” 提示问题,代码如下</p>
+<pre><code class="lang-html">利用：v-if进行判断，当list为空时，才显示没有品牌数据
+
+&lt;tr v-if=&quot;list.length==0&quot;&gt;
+&lt;td colspan=&quot;4&quot;&gt;没有品牌数据&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+</li>
+</ol>
+<h3 id="-">功能-数据删除</h3>
+<ol>
+<li><p>给按钮绑定删除方法，并传入一个id</p>
+<pre><code class="lang-html">&lt;a href=&quot;javascript:void(0)&quot; @click=&quot;deleteData(item.id)&quot;&gt;删除&lt;/a&gt;
+</code></pre>
+</li>
+<li><p>Vue实例中定义删除的方法</p>
+<pre><code class="lang-js">methods: {
+ deleteData(id) {
+   // 返回满足函数条件的数组的项的index
+   var index = this.list.findIndex(item =&gt; {
+     return item.id === id
+   })
+   // 删除该索引对应的值
+   this.list.splice(index, 1)
+ }
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="-">功能-数据添加</h3>
+<ul>
+<li><p>效果图</br>
+<img src="./img/day01/添加数据.png" alt="添加数据"></p>
+</li>
+<li><p>实现步骤1：在Vue对象实例的data中添加一个product对象{id:0,name:&#39;&#39;,ctime:Date()}</p>
+<pre><code class="lang-js">new Vue({
+el: &#39;#app&#39;,
+data: {
+   product:{id:0,name:&#39;&#39;,ctime:Date()},        
+   list:[
+       {id:1,name:&#39;宝马&#39;,ctime:Date()},
+       {id:2,name:&#39;奔驰&#39;,ctime:Date()}
+   ]
+},
+methods: {      
+}
+})
+</code></pre>
+</li>
+<li><p>实现步骤2：在编号和品牌名称文本框中利用v-model对product对象中的id和name属性进行一一绑定 同时在添加按钮上利用 v-on:click注册事件addData</p>
+<pre><code class="lang-html">编号:&lt;input type=&quot;text&quot; v-model=&quot;product.id&quot;&gt;
+品牌名称: &lt;input type=&quot;text&quot; v-model=&quot;product.name&quot;&gt;
+&lt;input type=&quot;button&quot; value=&quot;添加&quot; @click=&quot;addData&quot;&gt;
+</code></pre>
+</li>
+<li><p>实现步骤3：在Vue对象实例的methods中添加一个 addData的方法实现添加逻辑即可完成</p>
+<pre><code class="lang-js">new Vue({
+ // vm控制的区块为id为app的div，此div中的所有vue指令均可以被vm解析
+ el: &#39;#app&#39;,
+ data: {
+     product:{id:0,name:&#39;&#39;,ctime:Date()},
+     list:[
+         {id:1,name:&#39;宝马&#39;,ctime:Date()},
+         {id:2,name:&#39;奔驰&#39;,ctime:Date()}
+     ]
+ },
+ methods: {
+     addData(){
+         // 修改品牌添加时间为当前时间
+         this.product.ctime = Date();
+
+         // 添加数据到品牌列表中
+         this.list.push(this.product);
+
+         // 清空product
+         this.product = {id:0,name:&#39;&#39;,ctime:Date()};
+     }
+ }
+})
+</code></pre>
+</li>
+</ul>
+<h3 id="-">功能-按回车键添加数据</h3>
+<p>  <strong>关键点：利用v-on的.enter按键修饰符实现，回车键的keycode=13</strong></br>
+  <img src="./img/day01/回车添加数据.png" alt="回车添加数据"></p>
+<pre><code class="lang-html">  品牌名称: &lt;input type=&quot;text&quot; v-model=&quot;product.name&quot; @keydown.13=&quot;addData&quot;&gt;
+
+  &lt;!-- 或者 --&gt;
+  品牌名称: &lt;input type=&quot;text&quot; v-model=&quot;product.name&quot; @keydown.enter=&quot;addData&quot;&gt;
+</code></pre>
+<h3 id="-">功能-输入框自动聚焦</h3>
+<p>  在vue中实现这个需求有三种方式：</p>
+<ul>
+<li>可以使用document.getElementById()获取到文本框元素对象后调用其focus()方法和设置style属性</li>
+<li>可以在文本框上元素上增加一个 ref=&quot;自定义名称&quot;，再使用this.$refs.自定义名称.focus()和
+this.$refs.自定义名称.style=&quot;color:red&quot; 设置style属性</li>
+<li><p>使用自定义指令实现封装</p>
+<blockquote>
+<p>注意：前两种方式的代码需要写到生命周期事件：mounted(){}中</p>
+</blockquote>
+</li>
+<li><p>原生js操作DOM实现</p>
+<pre><code class="lang-html">// html代码
+编号:&lt;input type=&quot;text&quot; v-model=&quot;product.id&quot; id=&quot;id&quot;&gt;
+
+// vue对象mounted(){}中代码
+mounted(){
+   document.getElementById(&#39;id&#39;).focus();
+   document.getElementById(&#39;id&#39;).style=&quot;color:red&quot;;
+}
+</code></pre>
+</li>
+<li><p>ref方式实现</p>
+<pre><code class="lang-html">// html代码：
+编号:&lt;input type=&quot;text&quot; v-model=&quot;product.id&quot; ref=&quot;id&quot;&gt;
+
+// vue对象mounted(){}中代码
+mounted(){
+   this.$refs.id.focus();
+   this.$refs.id.style=&quot;color:red&quot;;
+ }
+</code></pre>
+</li>
+<li><p>使用自定义指令</p>
+</li>
+<li><p>使用说明</p>
+<ul>
+<li>利用Vue.directive(&#39;指令id&#39;,{inserted:function(el,binding){}})</li>
+<li><p>参数说明</p>
+<ul>
+<li><p>指令id可由程序员自行定义，注意和系统指令名称有所区别，例如：
+focus,在某个元素上具体使用的时候请在 指令id前面再加上v-,例如
+<code>&lt;input v-focus&gt;</code></p>
+</li>
+<li><p>第二个参数是一个对象，其中inserted是一个函数，表示 “被绑定元素插入父节点时调用”</p>
+<ul>
+<li>inserted的参数：<ul>
+<li>el参数：表示使用此自定义指令的dom对象</li>
+<li>binding参数：一个对象，包含以下属性：<ul>
+<li>name：指令名，不包括 v- 前缀。</li>
+<li>value：指令的绑定值，例如：v-focus=&quot;colorvalue&quot;, value 的值是colorvalue这个变量的值，colorvalue定义在data(){}中</li>
+<li>expression：绑定值的字符串形式。例如 v-focus=&quot;colorvalue&quot; ，expression 的值是 &quot;colorvalue&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>开始使用Vue.directive()封装自定义指令v-focus实现光标自动定位</p>
+<p>```html
+1、定义指令color
+Vue.directive(&#39;color&#39;,{</p>
+<pre><code>inserted:function(el,binding){
+  //将颜色设置给使用v-color指令的元素上
+  el.style.color=binding.value;
+}
+</code></pre><p>});</p>
+</li>
+</ul>
+<p>  2、 在dom元素上使用指令，注意加上前缀 v-
+  编号:<input type="text" v-model="product.id" v-color="colorvalue"></p>
+<p>  3、在Vue对象实例中的data(){}中定义colorvalue
+    new Vue({
+      data: {
+          colorvalue:&#39;red&#39;
+      }
+    });</p>
+<pre><code>
+### ref
+
+ref的作用类似于document.getElementByID,在vue中想要获取一个dom对象或者组件对象，则只需要 在此元素上添加一个 ref=&quot;自定义名称&quot; ，再使用 this.$refs.自定义名称即可获取
+
+  ```html
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;vue2.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id=&quot;app&quot;&gt;
+      &lt;span ref=&quot;sp&quot;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+      new Vue({
+        el:&#39;#app&#39;,
+        methods:{
+          getobj:function(){
+            //获取到span元素的dom对象，类似于使用document.getElementByID(&#39;sp&#39;)
+            // spanobj就是span的dom对象，可以调用 style,innerHTML,innerText等进行操作
+              var spanobj =  this.$refs.sp;              
+          }
+        }
+        })
+    &lt;/script&gt;
+  &lt;/html&gt;
+</code></pre><h3 id="-">功能-时间格式化</h3>
+<pre><code class="lang-html">  // 定义全局过滤器datefmt
+  Vue.filter(&#39;datefmt&#39;,function(input){
+      var date = new Date(input);
+      var year = date.getFullYear();
+      var m = date.getMonth() + 1;
+      var d = date.getDate();            
+      var fmtStr = year+&#39;-&#39;+m +&#39;-&#39;+d;
+      return fmtStr; //返回输出结果
+  });
+
+  // 调用, 注意datefmt的第一个参数默认就是管道符左边的值
+  &lt;td&gt;{{item.ctime | datefmt }}&lt;/td&gt;
+</code></pre>
+<h3 id="-">过滤器</h3>
+<ol>
+<li><p>私有过滤器</p>
+</li>
+<li><p>定义方式</p>
+<pre><code>可以在 new Vue({filters：{}})中的filters中注册一个私有过滤器
+
+定义格式：
+new Vue({
+  el:&#39;#app&#39;,
+  filters:{        
+      &#39;过滤器名称&#39;:function(管道符号|左边对象的值,参数1,参数2,....) {
+        return 对管道符号|左边参数的值做处理以后的值
+      })    
+  }
+  });
+
+Vue2.0 调用过滤器传参写法：
+&lt;span&gt;{{ msg | 过滤器id(&#39;参数1&#39;,&#39;参数2&#39; ....) }}&lt;/span&gt;
+</code></pre></li>
+<li><p>(应用示例)自定义私有过滤器实现日期格式化</p>
+<pre><code class="lang-html">    1、 定义私有的日期格式化过滤器：
+    new Vue({
+        el:&#39;#app&#39;,
+        data:{
+            time:new Date()
+        },
+        filters:{
+            //定义在 VM中的filters对象中的所有过滤器都是私有过滤器
+            datefmt:function(input,splicchar){
+                var date = new Date(input);
+                var year = date.getFullYear();
+                var m = date.getMonth() + 1;
+                var d = date.getDate();            
+                var fmtStr = year+splicchar+m +splicchar+d;
+                return fmtStr; //返回输出结果
+            }
+        }
+    });
+    2、使用
+    &lt;div id=&quot;app&quot;&gt;
+      {{ time | datefmt(&#39;-&#39;) }} //Vue2.0传参写法
+    &lt;/div&gt;
+</code></pre>
+</li>
+<li><p>全局过滤器</p>
+</li>
+<li><p>定义方式</p>
+<pre><code>可以用全局方法 Vue.filter() 注册一个全局自定义过滤器，它接收两个参数：过滤器 ID 和过滤器函数。过滤器函数以值为参数，返回转换后的值
+
+定义格式：
+Vue.filter(&#39;过滤器名称&#39;, function (管道符号|左边参数的值,其他参数1,其他参数2,....) {
+  return 对管道符号|左边参数的值做处理以后的值
+})
+
+Vue2.0 使用：参数调用时用()，多个参数中间使用逗号分开
+&lt;span&gt;{{ msg | 过滤器名称(&#39;参数1&#39;,&#39;参数2&#39; ....) }}&lt;/span&gt;
+</code></pre></li>
+<li><p>(应用示例)自定义全局过滤器实现日期格式化</p>
+<pre><code class="lang-html">  1、 定义全局的日期格式化过滤器：
+  Vue.filter(&#39;datefmt&#39;,function(input,splicchar){
+      var date = new Date(input);
+      var year = date.getFullYear();
+      var m = date.getMonth() + 1;
+      var d = date.getDate();            
+      var fmtStr = year+splicchar+m +splicchar+d;
+      return fmtStr; //返回输出结果
+  });    
+
+  2、使用
+      &lt;div id=&quot;app&quot;&gt;
+        {{ time | datefmt(&#39;-&#39;) }} //Vue2.0传参写法
+      &lt;/div&gt;
+
+    &lt;script&gt;  
+        new Vue({
+            el:&#39;#app1&#39;,
+            data:{
+                time:new Date()
+            }
+        });
+    &lt;/script&gt;
+</code></pre>
+</li>
+</ol>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>
